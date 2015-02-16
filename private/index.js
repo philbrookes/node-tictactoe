@@ -82,6 +82,10 @@ io.on('connection', function(socket){
 });
 
 function checkForWin(game, data){
+	//takes at least 5 moves for anyone to have won
+	if(game.moves < 5){
+		return;
+	}
 	var winner = '';
 	//check for column like:
 	// + _ _ 
