@@ -143,8 +143,12 @@ function checkForWin(game, data){
 	}
 	//winner found? tell the players
 	if(winner !== ''){
-		game.players[data.type].socket.emit("winner");
-		game.players[data.type].opponent.socket.emit("loser");
+		for(id in game.players){
+			if(game.players[id].id === data.type){
+				game.players[id].socket.emit("winner");
+				game.players[id].opponent.socket.emit("loser");
+			}
+		}
 		game.players[0].status = "paused";
 		game.players[1].status = "paused";
 		pausePlayer(game.players[0]);
